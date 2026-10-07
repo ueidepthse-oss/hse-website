@@ -1,5 +1,5 @@
-/* HERO (ramping) */
-.hero{background:linear-gradient(90deg,#0b3d2aee 0,#0b3d2a99 45%,#0b3d2a33 70%),url(../img/hero.jpg) center/cover,linear-gradient(120deg,#0b3d2a,#2f7d4f 60%,#8a9b6b);color:#fff}
+/* HERO (foto: assets/img/hero.jpg) */
+.hero{background:linear-gradient(90deg,#0b3d2aee 0,#0b3d2a99 45%,#0b3d2a33 70%),url(../img/hero.jpg) right center/cover no-repeat,linear-gradient(120deg,#0b3d2a,#2f7d4f 60%,#8a9b6b);color:#fff}
 .hero-in{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:center;min-height:200px;padding-top:18px;padding-bottom:18px}
 .hero small{color:var(--g3);font-weight:700;font-size:14px}
 .hero h1{font-size:clamp(22px,3vw,30px);line-height:1.15;margin:4px 0 8px;max-width:520px}
