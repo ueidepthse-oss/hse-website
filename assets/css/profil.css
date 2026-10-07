@@ -1,9 +1,9 @@
-/* HERO "Tentang Kami" (gaya hero Home, foto: assets/img/profil.jpg) */
+/* HERO "Tentang Kami" (ramping, foto: assets/img/profil.jpg) */
 .p-hero{background:linear-gradient(90deg,#0b3d2aee 0,#0b3d2a99 50%,#0b3d2a33 80%),url(../img/profil.jpg) right center/cover no-repeat,linear-gradient(120deg,#0b3d2a,#2f7d4f 60%,#8a9b6b);color:#fff;scroll-margin-top:76px}
-.p-hero-in{display:flex;align-items:center;min-height:240px;padding-top:32px;padding-bottom:32px}
-.p-hero small{color:var(--g3);font-weight:700;font-size:14px}
-.p-hero h1{font-family:Fraunces,Georgia,"Times New Roman",serif;font-size:clamp(30px,4.2vw,44px);line-height:1.1;margin:4px 0 14px;font-weight:700}
-.p-hero p{max-width:620px;font-size:15px;line-height:1.65;color:#eaf4ee;margin-bottom:10px}
+.p-hero-in{display:flex;align-items:center;min-height:150px;padding-top:20px;padding-bottom:20px}
+.p-hero small{color:var(--g3);font-weight:700;font-size:13px}
+.p-hero h1{font-family:Fraunces,Georgia,"Times New Roman",serif;font-size:clamp(24px,3.2vw,32px);line-height:1.1;margin:2px 0 8px;font-weight:700}
+.p-hero p{max-width:780px;font-size:13px;line-height:1.55;color:#eaf4ee;margin-bottom:6px}
 
 /* Fon judul bagian */
 .blk h2,.vm h3,.nilai b,.tl time{font-family:Fraunces,Georgia,"Times New Roman",serif}
@@ -15,23 +15,23 @@
 .p-index a:hover{color:var(--g1)}
 .p-index a.act{color:var(--g1);border-left-color:var(--g3)}
 .p-main{max-width:880px;min-width:0}
-.blk{padding-bottom:56px;margin-bottom:56px;border-bottom:1px solid var(--line);scroll-margin-top:96px}
+.blk{padding-bottom:48px;margin-bottom:48px;border-bottom:1px solid var(--line);scroll-margin-top:96px}
 .blk:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
-.blk h2{font-size:32px;line-height:1.15;color:var(--g2);margin-bottom:22px}
+.blk h2{font-size:30px;line-height:1.15;color:var(--g2);margin-bottom:18px}
 .blk p{font-size:16px;line-height:1.75;color:#2a3f36;margin-bottom:14px;max-width:68ch}
 
-/* Visi & Misi (2 kotak berdampingan) */
-.vm{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch}
-.vm-box{border-radius:6px;padding:26px 24px}
-.vm h3{font-size:24px;line-height:1.2;margin:0 0 12px}
-.vm-visi{background:var(--g1);color:#fff;border-left:8px solid var(--gl)}
+/* Visi & Misi (2 kotak berdampingan, compact) */
+.vm{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
+.vm-box{border-radius:6px;padding:16px 18px}
+.vm h3{font-size:19px;line-height:1.2;margin:0 0 8px}
+.vm-visi{background:var(--g1);color:#fff;border-left:6px solid var(--gl)}
 .vm-visi h3{color:var(--gl)}
-.blk .vm-visi p{font-family:Fraunces,Georgia,serif;font-size:21px;line-height:1.5;font-weight:500;color:#fff;margin:0}
+.blk .vm-visi p{font-family:Fraunces,Georgia,serif;font-size:16.5px;line-height:1.5;font-weight:500;color:#fff;margin:0}
 .vm-misi{background:#fff;border:1px solid var(--line);border-top:4px solid var(--g1)}
 .vm-misi h3{color:var(--g2)}
-.misi li{position:relative;padding:9px 0 9px 24px;border-bottom:1px solid var(--line);font-size:14.5px;line-height:1.55;color:#2a3f36}
+.misi li{position:relative;padding:5px 0 5px 20px;border-bottom:1px solid var(--line);font-size:13px;line-height:1.45;color:#2a3f36}
 .misi li:last-child{border-bottom:0}
-.misi li::before{content:"";position:absolute;left:0;top:16px;width:10px;height:10px;background:var(--g3);border-radius:2px}
+.misi li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:8px;background:var(--g3);border-radius:2px}
 
 /* Nilai Kerja (4 kotak berdampingan) */
 .nilai{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
@@ -48,14 +48,14 @@
 .org-photo span{color:#fff;font-size:13px;font-weight:600}
 .org-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 
-/* Perjalanan (urutan tahun, jadi pakai garis waktu) */
-.tl{position:relative;padding-left:4px}
-.tl::before{content:"";position:absolute;left:62px;top:6px;bottom:6px;width:2px;background:#bcd9c8}
-.tl li{display:grid;grid-template-columns:58px 1fr;gap:28px;padding:0 0 26px;position:relative}
-.tl li::after{content:"";position:absolute;left:56px;top:6px;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--g3)}
-.tl time{font-weight:700;font-size:20px;color:var(--g1)}
-.tl b{font-size:16px;color:var(--g2)}
-.tl p{font-size:15px;margin:2px 0 0}
+/* Perjalanan (timeline mendatar: 2025 - 2026) */
+.tl{position:relative;display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.tl::before{content:"";position:absolute;left:0;right:0;top:36px;height:3px;background:#bcd9c8;border-radius:2px}
+.tl li{position:relative;padding-top:56px}
+.tl time{position:absolute;top:0;left:0;font-weight:700;font-size:24px;line-height:1;color:var(--g1)}
+.tl li::before{content:"";position:absolute;left:0;top:28px;width:19px;height:19px;border-radius:50%;background:#fff;border:4px solid var(--g3);z-index:1}
+.tl b{display:block;font-size:16px;color:var(--g2)}
+.tl p{font-size:14.5px;line-height:1.55;margin:4px 0 0;max-width:34ch}
 
 @media(max-width:900px){
   .p-body{grid-template-columns:1fr;gap:28px}
