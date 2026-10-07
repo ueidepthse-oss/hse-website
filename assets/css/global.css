@@ -4,6 +4,7 @@ html{scroll-behavior:smooth}
 body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
 a{color:inherit;text-decoration:none}
 ul{list-style:none}
+img{max-width:100%}
 a:focus-visible,button:focus-visible{outline:3px solid var(--g3);outline-offset:2px}
 .wrap{max-width:1280px;margin:0 auto;padding:0 24px}
 .btn{display:inline-flex;gap:8px;align-items:center;background:var(--g3);color:#fff;font-weight:600;font-size:14px;padding:12px 24px;border-radius:999px;transition:background .2s}
@@ -13,7 +14,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--g3);outline-offset:
 .site-header{background:#fff;position:sticky;top:0;z-index:50;box-shadow:0 1px 0 var(--line)}
 .bar{display:flex;align-items:center;justify-content:space-between;height:76px;gap:16px}
 .brand{display:flex;align-items:center;gap:10px}
-.logo{width:46px;height:46px;border-radius:50%;background:var(--g1);color:#fff;display:grid;place-items:center;font-size:24px;border:4px solid var(--g2);flex:none}
+.logo-img{height:46px;width:auto;display:block;flex:none;object-fit:contain}
 .brand b{display:block;color:var(--g1);font-size:18px;line-height:1.1}
 .brand small{color:var(--mut);font-size:12px}
 .nav>ul{display:flex;gap:26px}
@@ -34,7 +35,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--g3);outline-offset:
 .foot{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 24px;flex-wrap:wrap}
 .foot .brand b{color:#fff;font-size:14px}
 .foot .brand small{color:#a9c7b8;font-size:11px}
-.foot .logo{width:38px;height:38px;font-size:18px;background:var(--g3);border-color:#fff3}
+.foot .logo-img{height:38px}
 .foot ul{display:flex;gap:0;flex-wrap:wrap}
 .foot li+li{border-left:1px solid #fff4;margin-left:16px;padding-left:16px}
 .foot a:hover{color:#fff;text-decoration:underline}
