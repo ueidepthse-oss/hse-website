@@ -27,7 +27,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gl);outline-offset:
 .nav .sub a{padding:9px 12px;font-weight:500;border-radius:6px;color:var(--ink)}
 .nav .sub a:hover{background:var(--bg);color:var(--g1)}
 .dd:hover>.sub,.dd:focus-within>.sub{display:block}
-.tools{display:flex;gap:18px;font-size:18px;color:#fff}
 .burger{display:none;background:none;border:0;font-size:26px;color:#fff;cursor:pointer}
 
 /* Footer */
@@ -42,7 +41,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gl);outline-offset:
 
 @media(max-width:980px){
   .burger{display:block}
-  .tools{display:none}
   .nav{display:none;position:absolute;top:76px;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:8px 24px 16px;box-shadow:0 14px 24px #0b3d2a2a}
   .nav.open{display:block}
   .nav>ul{flex-direction:column;gap:0}
