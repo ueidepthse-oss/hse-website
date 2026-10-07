@@ -29,15 +29,13 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gl);outline-offset:
 .dd:hover>.sub,.dd:focus-within>.sub{display:block}
 .burger{display:none;background:none;border:0;font-size:26px;color:#fff;cursor:pointer}
 
-/* Footer */
-.site-footer{background:var(--g2);color:#dcebe3;font-size:13px}
-.foot{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 24px;flex-wrap:wrap}
-.foot .brand b{color:#fff;font-size:14px}
-.foot .brand small{color:#a9c7b8;font-size:11px}
-.foot .logo-img{height:38px}
-.foot ul{display:flex;gap:0;flex-wrap:wrap}
-.foot li+li{border-left:1px solid #fff4;margin-left:16px;padding-left:16px}
-.foot a:hover{color:#fff;text-decoration:underline}
+/* Footer (ramping: logo kiri, copyright kanan) */
+.site-footer{background:var(--g2);color:#dcebe3;font-size:12px}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
+.foot .brand b{color:#fff;font-size:13px}
+.foot .brand small{color:#a9c7b8;font-size:10.5px}
+.foot .logo-img{height:32px}
+.foot .copy{margin-left:auto;text-align:right}
 
 @media(max-width:980px){
   .burger{display:block}
@@ -49,5 +47,9 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gl);outline-offset:
   .nav a.on{box-shadow:none}
   .sub{position:static;display:block;border:0;box-shadow:none;padding:0 0 0 14px}
   .dd>a::after{content:""}
+}
+@media(max-width:560px){
+  .foot{justify-content:center;text-align:center}
+  .foot .copy{margin-left:0;text-align:center}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
