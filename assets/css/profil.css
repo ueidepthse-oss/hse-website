@@ -3,21 +3,20 @@
 .p-head .wrap{border-left:6px solid var(--g1);padding-left:28px}
 .crumb{font-size:13px;color:var(--mut);margin-bottom:8px}
 .crumb a{color:var(--g1);font-weight:600}
-.p-head h1,.blk h2,.visi{font-family:Fraunces,Georgia,"Times New Roman",serif}
+.p-head h1,.blk h2,.vm h3,.nilai b,.tl time{font-family:Fraunces,Georgia,"Times New Roman",serif}
 .p-head h1{font-size:clamp(32px,5vw,50px);line-height:1.1;color:var(--g2);font-weight:700}
 .lead{max-width:600px;margin-top:12px;font-size:17px;color:#2c4a3d}
 
 /* Tubuh halaman: daftar isi kiri + teks kanan */
-.p-body{display:grid;grid-template-columns:210px 1fr;gap:56px;padding-top:44px;padding-bottom:70px}
+.p-body{display:grid;grid-template-columns:210px 1fr;gap:48px;padding-top:44px;padding-bottom:70px}
 .p-index{position:sticky;top:100px;align-self:start;display:flex;flex-direction:column;border-left:2px solid var(--line)}
 .p-index a{padding:9px 16px;margin-left:-2px;border-left:2px solid transparent;font-size:14px;font-weight:600;color:var(--mut)}
 .p-index a:hover{color:var(--g1)}
 .p-index a.act{color:var(--g1);border-left-color:var(--g3)}
-.p-main{max-width:820px}
+.p-main{max-width:880px;min-width:0}
 .blk{padding-bottom:56px;margin-bottom:56px;border-bottom:1px solid var(--line);scroll-margin-top:96px}
 .blk:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
 .blk h2{font-size:32px;line-height:1.15;color:var(--g2);margin-bottom:22px}
-.blk h3{font-size:18px;color:var(--g1);margin:30px 0 12px}
 .blk p{font-size:16px;line-height:1.75;color:#2a3f36;margin-bottom:14px;max-width:68ch}
 
 /* Tentang */
@@ -25,29 +24,46 @@
 .photo{aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:linear-gradient(135deg,#2f7d4f,#8fbf9f)}
 .photo img{width:100%;height:100%;object-fit:cover;display:block}
 
-/* Visi & Misi */
-.visi{background:var(--g1);color:#fff;padding:34px 36px;font-size:clamp(20px,2.4vw,26px);line-height:1.4;font-weight:500;border-radius:4px;border-left:8px solid var(--gl)}
-.visi small{display:block;font-family:Inter,system-ui,sans-serif;font-size:13px;font-weight:700;color:var(--gl);margin-bottom:10px}
-.misi li{position:relative;padding:12px 0 12px 28px;border-bottom:1px solid var(--line);font-size:16px;line-height:1.6;color:#2a3f36}
-.misi li::before{content:"";position:absolute;left:0;top:21px;width:12px;height:12px;background:var(--g3);border-radius:2px}
+/* Visi & Misi (2 kotak berdampingan) */
+.vm{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch}
+.vm-box{border-radius:6px;padding:26px 24px}
+.vm h3{font-size:24px;line-height:1.2;margin:0 0 12px}
+.vm-visi{background:var(--g1);color:#fff;border-left:8px solid var(--gl)}
+.vm-visi h3{color:var(--gl)}
+.blk .vm-visi p{font-family:Fraunces,Georgia,serif;font-size:21px;line-height:1.5;font-weight:500;color:#fff;margin:0}
+.vm-misi{background:#fff;border:1px solid var(--line);border-top:4px solid var(--g1)}
+.vm-misi h3{color:var(--g2)}
+.misi li{position:relative;padding:9px 0 9px 24px;border-bottom:1px solid var(--line);font-size:14.5px;line-height:1.55;color:#2a3f36}
+.misi li:last-child{border-bottom:0}
+.misi li::before{content:"";position:absolute;left:0;top:16px;width:10px;height:10px;background:var(--g3);border-radius:2px}
 
-/* Nilai Kerja */
-.nilai{display:grid;grid-template-columns:repeat(2,1fr);gap:0 36px}
-.nilai div{border-top:3px solid var(--g1);padding:16px 0 26px}
-.nilai b{font-family:Fraunces,Georgia,serif;font-size:20px;color:var(--g2)}
-.nilai p{font-size:15px;margin:6px 0 0}
+/* Nilai Kerja (4 kotak berdampingan) */
+.nilai{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.nilai div{background:#fff;border:1px solid var(--line);border-top:4px solid var(--g1);border-radius:6px;padding:18px 16px 20px}
+.nilai b{display:block;font-size:18px;line-height:1.25;color:var(--g2)}
+.nilai p{font-size:14px;line-height:1.55;margin:8px 0 0}
 
 /* Struktur Organisasi */
 .org{background:#f0f7f3;border:1px solid #d6e8dd;border-radius:6px;padding:30px 20px 26px}
-.org-top,.org-box{background:#fff;border:1px solid #c5ddd0;border-top:4px solid var(--g1);border-radius:4px;text-align:center;padding:12px 14px}
-.org-top{max-width:240px;margin:0 auto;position:relative}
-.org-top::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:24px;background:#9bc4ae}
 .org b{display:block;font-size:15px;color:var(--g2)}
 .org span{font-size:12px;color:var(--mut)}
-.org-branch{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px;position:relative}
+
+/* Dua kotak foto personel */
+.org-lead{display:flex;justify-content:center;gap:20px;position:relative;margin-bottom:36px}
+.org-lead::before{content:"";position:absolute;bottom:-12px;left:calc(50% - 110px);width:220px;border-top:2px solid #9bc4ae}
+.org-lead::after{content:"";position:absolute;bottom:-36px;left:calc(50% - 1px);width:2px;height:24px;background:#9bc4ae}
+.org-card{position:relative;width:200px;max-width:100%;background:#fff;border:1px solid #c5ddd0;border-top:4px solid var(--g1);border-radius:6px;padding:12px;text-align:center}
+.org-card::after{content:"";position:absolute;top:100%;left:calc(50% - 1px);width:2px;height:12px;background:#9bc4ae}
+.org-photo{position:relative;aspect-ratio:3/4;border-radius:4px;overflow:hidden;background:linear-gradient(160deg,#2f7d4f,#8fbf9f);display:grid;place-items:center;margin-bottom:10px}
+.org-photo span{color:#fff;font-size:13px;font-weight:600}
+.org-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* Tiga posisi di bawahnya */
+.org-box{background:#fff;border:1px solid #c5ddd0;border-top:4px solid var(--g1);border-radius:4px;text-align:center;padding:12px 14px}
+.org-branch{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;position:relative}
 .org-branch::before{content:"";position:absolute;top:0;left:16.66%;right:16.66%;border-top:2px solid #9bc4ae}
 .org-col{position:relative;padding-top:24px}
-.org-col::before{content:"";position:absolute;top:0;left:50%;width:2px;height:24px;background:#9bc4ae}
+.org-col::before{content:"";position:absolute;top:0;left:calc(50% - 1px);width:2px;height:24px;background:#9bc4ae}
 .org-col ul{margin-top:10px;padding:0 6px}
 .org-col li{font-size:13px;color:#2a3f36;padding:6px 0 6px 16px;border-bottom:1px dashed #cfe0d6;position:relative}
 .org-col li::before{content:"";position:absolute;left:2px;top:13px;width:6px;height:6px;border-radius:50%;background:var(--g3)}
@@ -57,7 +73,7 @@
 .tl::before{content:"";position:absolute;left:62px;top:6px;bottom:6px;width:2px;background:#bcd9c8}
 .tl li{display:grid;grid-template-columns:58px 1fr;gap:28px;padding:0 0 26px;position:relative}
 .tl li::after{content:"";position:absolute;left:56px;top:6px;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--g3)}
-.tl time{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:20px;color:var(--g1)}
+.tl time{font-weight:700;font-size:20px;color:var(--g1)}
 .tl b{font-size:16px;color:var(--g2)}
 .tl p{font-size:15px;margin:2px 0 0}
 
@@ -68,10 +84,17 @@
   .p-index a.act{border-bottom-color:var(--g3)}
   .about{grid-template-columns:1fr}
 }
+@media(max-width:700px){
+  .vm{grid-template-columns:1fr}
+  .nilai{grid-template-columns:repeat(2,1fr)}
+}
 @media(max-width:640px){
-  .nilai{grid-template-columns:1fr}
+  .org-lead{flex-direction:column;align-items:center;margin-bottom:24px}
+  .org-lead::before,.org-lead::after,.org-card::after{display:none}
   .org-branch{grid-template-columns:1fr}
-  .org-branch::before,.org-col::before,.org-top::after{display:none}
+  .org-branch::before,.org-col::before{display:none}
   .org-col{padding-top:0}
-  .visi{padding:24px 22px}
+}
+@media(max-width:420px){
+  .nilai{grid-template-columns:1fr}
 }
