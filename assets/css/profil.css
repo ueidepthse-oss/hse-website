@@ -1,11 +1,12 @@
-/* Judul halaman (terang, bergaya majalah) */
-.p-head{background:#e8f3ec;border-bottom:1px solid #cfe5d7;padding:44px 0 40px}
-.p-head .wrap{border-left:6px solid var(--g1);padding-left:28px}
-.crumb{font-size:13px;color:var(--mut);margin-bottom:8px}
-.crumb a{color:var(--g1);font-weight:600}
-.p-head h1,.blk h2,.vm h3,.nilai b,.tl time{font-family:Fraunces,Georgia,"Times New Roman",serif}
-.p-head h1{font-size:clamp(32px,5vw,50px);line-height:1.1;color:var(--g2);font-weight:700}
-.lead{max-width:600px;margin-top:12px;font-size:17px;color:#2c4a3d}
+/* HERO "Tentang Kami" (gaya hero Home, foto: assets/img/profil.jpg) */
+.p-hero{background:linear-gradient(90deg,#0b3d2aee 0,#0b3d2a99 50%,#0b3d2a33 80%),url(../img/profil.jpg) right center/cover no-repeat,linear-gradient(120deg,#0b3d2a,#2f7d4f 60%,#8a9b6b);color:#fff;scroll-margin-top:76px}
+.p-hero-in{display:flex;align-items:center;min-height:240px;padding-top:32px;padding-bottom:32px}
+.p-hero small{color:var(--g3);font-weight:700;font-size:14px}
+.p-hero h1{font-family:Fraunces,Georgia,"Times New Roman",serif;font-size:clamp(30px,4.2vw,44px);line-height:1.1;margin:4px 0 14px;font-weight:700}
+.p-hero p{max-width:620px;font-size:15px;line-height:1.65;color:#eaf4ee;margin-bottom:10px}
+
+/* Fon judul bagian */
+.blk h2,.vm h3,.nilai b,.tl time{font-family:Fraunces,Georgia,"Times New Roman",serif}
 
 /* Tubuh halaman: daftar isi kiri + teks kanan */
 .p-body{display:grid;grid-template-columns:210px 1fr;gap:48px;padding-top:44px;padding-bottom:70px}
@@ -18,11 +19,6 @@
 .blk:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
 .blk h2{font-size:32px;line-height:1.15;color:var(--g2);margin-bottom:22px}
 .blk p{font-size:16px;line-height:1.75;color:#2a3f36;margin-bottom:14px;max-width:68ch}
-
-/* Tentang */
-.about{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:start}
-.photo{aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:linear-gradient(135deg,#2f7d4f,#8fbf9f)}
-.photo img{width:100%;height:100%;object-fit:cover;display:block}
 
 /* Visi & Misi (2 kotak berdampingan) */
 .vm{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch}
@@ -43,30 +39,14 @@
 .nilai b{display:block;font-size:18px;line-height:1.25;color:var(--g2)}
 .nilai p{font-size:14px;line-height:1.55;margin:8px 0 0}
 
-/* Struktur Organisasi */
-.org{background:#f0f7f3;border:1px solid #d6e8dd;border-radius:6px;padding:30px 20px 26px}
-.org b{display:block;font-size:15px;color:var(--g2)}
-.org span{font-size:12px;color:var(--mut)}
-
-/* Dua kotak foto personel */
-.org-lead{display:flex;justify-content:center;gap:20px;position:relative;margin-bottom:36px}
-.org-lead::before{content:"";position:absolute;bottom:-12px;left:calc(50% - 110px);width:220px;border-top:2px solid #9bc4ae}
-.org-lead::after{content:"";position:absolute;bottom:-36px;left:calc(50% - 1px);width:2px;height:24px;background:#9bc4ae}
-.org-card{position:relative;width:200px;max-width:100%;background:#fff;border:1px solid #c5ddd0;border-top:4px solid var(--g1);border-radius:6px;padding:12px;text-align:center}
-.org-card::after{content:"";position:absolute;top:100%;left:calc(50% - 1px);width:2px;height:12px;background:#9bc4ae}
+/* Struktur Organisasi (2 kotak foto personel) */
+.org{display:flex;justify-content:center;gap:24px;background:#f0f7f3;border:1px solid #d6e8dd;border-radius:6px;padding:30px 20px}
+.org-card{width:220px;max-width:100%;background:#fff;border:1px solid #c5ddd0;border-top:4px solid var(--g1);border-radius:6px;padding:12px;text-align:center}
+.org-card b{display:block;font-size:15px;color:var(--g2)}
+.org-card span{font-size:12px;color:var(--mut)}
 .org-photo{position:relative;aspect-ratio:3/4;border-radius:4px;overflow:hidden;background:linear-gradient(160deg,#2f7d4f,#8fbf9f);display:grid;place-items:center;margin-bottom:10px}
 .org-photo span{color:#fff;font-size:13px;font-weight:600}
 .org-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-
-/* Tiga posisi di bawahnya */
-.org-box{background:#fff;border:1px solid #c5ddd0;border-top:4px solid var(--g1);border-radius:4px;text-align:center;padding:12px 14px}
-.org-branch{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;position:relative}
-.org-branch::before{content:"";position:absolute;top:0;left:16.66%;right:16.66%;border-top:2px solid #9bc4ae}
-.org-col{position:relative;padding-top:24px}
-.org-col::before{content:"";position:absolute;top:0;left:calc(50% - 1px);width:2px;height:24px;background:#9bc4ae}
-.org-col ul{margin-top:10px;padding:0 6px}
-.org-col li{font-size:13px;color:#2a3f36;padding:6px 0 6px 16px;border-bottom:1px dashed #cfe0d6;position:relative}
-.org-col li::before{content:"";position:absolute;left:2px;top:13px;width:6px;height:6px;border-radius:50%;background:var(--g3)}
 
 /* Perjalanan (urutan tahun, jadi pakai garis waktu) */
 .tl{position:relative;padding-left:4px}
@@ -82,18 +62,13 @@
   .p-index{position:static;flex-direction:row;overflow-x:auto;border-left:0;border-bottom:2px solid var(--line)}
   .p-index a{white-space:nowrap;border-left:0;border-bottom:2px solid transparent;margin:0 0 -2px}
   .p-index a.act{border-bottom-color:var(--g3)}
-  .about{grid-template-columns:1fr}
 }
 @media(max-width:700px){
   .vm{grid-template-columns:1fr}
   .nilai{grid-template-columns:repeat(2,1fr)}
 }
-@media(max-width:640px){
-  .org-lead{flex-direction:column;align-items:center;margin-bottom:24px}
-  .org-lead::before,.org-lead::after,.org-card::after{display:none}
-  .org-branch{grid-template-columns:1fr}
-  .org-branch::before,.org-col::before{display:none}
-  .org-col{padding-top:0}
+@media(max-width:560px){
+  .org{flex-direction:column;align-items:center}
 }
 @media(max-width:420px){
   .nilai{grid-template-columns:1fr}
