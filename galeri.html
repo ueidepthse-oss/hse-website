@@ -52,13 +52,11 @@
 
     <section id="foto" class="gl-sec">
       <h2>Foto</h2>
-      <p class="gl-hint">Geser atau tekan tombol panah untuk melihat foto lainnya.</p>
+      <p class="gl-hint">Geser atau tekan tombol panah untuk melihat foto lainnya. Foto dari berita terbaru tampil paling depan.</p>
       <div class="strip-wrap">
         <button class="sbtn sprev" aria-label="Geser ke kiri">&#8249;</button>
         <div class="strip" id="strip">
-          <button class="tile" data-lb data-src="assets/img/galeri-1.jpg" data-cap="Safety talk bahaya alat berat"><span class="ph"><img src="assets/img/galeri-1.jpg" alt="Safety talk bahaya alat berat" loading="lazy" onerror="this.remove()"></span><span class="cap">Safety talk bahaya alat berat</span></button>
-          <button class="tile" data-lb data-src="assets/img/galeri-2.jpg" data-cap="Simulasi keadaan darurat"><span class="ph"><img src="assets/img/galeri-2.jpg" alt="Simulasi keadaan darurat" loading="lazy" onerror="this.remove()"></span><span class="cap">Simulasi keadaan darurat</span></button>
-          <button class="tile" data-lb data-src="assets/img/galeri-3.jpg" data-cap="Pelatihan Basic First Aid"><span class="ph"><img src="assets/img/galeri-3.jpg" alt="Pelatihan Basic First Aid" loading="lazy" onerror="this.remove()"></span><span class="cap">Pelatihan Basic First Aid</span></button>
+          <!-- Foto dari halaman Berita dimasukkan otomatis di sini oleh script di bawah -->
           <button class="tile" data-lb data-src="assets/img/galeri-4.jpg" data-cap="Inspeksi area kerja"><span class="ph"><img src="assets/img/galeri-4.jpg" alt="Inspeksi area kerja" loading="lazy" onerror="this.remove()"></span><span class="cap">Inspeksi area kerja</span></button>
           <button class="tile" data-lb data-src="assets/img/galeri-5.jpg" data-cap="Pemeriksaan APD pekerja"><span class="ph"><img src="assets/img/galeri-5.jpg" alt="Pemeriksaan APD pekerja" loading="lazy" onerror="this.remove()"></span><span class="cap">Pemeriksaan APD pekerja</span></button>
           <button class="tile" data-lb data-src="assets/img/galeri-6.jpg" data-cap="Penghijauan area sekitar lokasi"><span class="ph"><img src="assets/img/galeri-6.jpg" alt="Penghijauan area sekitar lokasi" loading="lazy" onerror="this.remove()"></span><span class="cap">Penghijauan area sekitar lokasi</span></button>
@@ -132,16 +130,58 @@ strip.addEventListener('scroll', sync, { passive: true });
 window.addEventListener('resize', sync);
 sync();
 
-// Lightbox foto dan video
-const tiles = [...document.querySelectorAll('[data-lb]')];
+// Foto berita otomatis: baca berita.html, lalu masukkan foto tiap berita ke depan baris foto
+fetch('berita.html')
+  .then((r) => (r.ok ? r.text() : Promise.reject()))
+  .then((html) => {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const frag = document.createDocumentFragment();
+    doc.querySelectorAll('article.feature, article.card').forEach((a) => {
+      const pic = a.querySelector('.ph img');
+      if (!pic) return;
+      const src = pic.getAttribute('src');
+      const title = (a.querySelector('h2, h3') || {}).textContent || 'Berita HSE';
+      const time = a.querySelector('time');
+      const date = time ? time.textContent.trim() : '';
+      const cap = date ? title.trim() + ' (' + date + ')' : title.trim();
+
+      const b = document.createElement('button');
+      b.className = 'tile';
+      b.setAttribute('data-lb', '');
+      b.dataset.src = src;
+      b.dataset.cap = cap;
+
+      const ph = document.createElement('span');
+      ph.className = 'ph';
+      const img = new Image();
+      img.alt = title.trim();
+      img.loading = 'lazy';
+      img.onerror = () => img.remove();
+      img.src = src;
+      ph.appendChild(img);
+
+      const c = document.createElement('span');
+      c.className = 'cap';
+      c.textContent = title.trim();
+
+      b.append(ph, c);
+      frag.appendChild(b);
+    });
+    strip.prepend(frag);
+    sync();
+  })
+  .catch(() => {});
+
+// Lightbox foto dan video (daftar kotak dibaca ulang tiap dipakai, jadi foto berita ikut terhitung)
 const lb = document.getElementById('lb');
 const stage = document.getElementById('stage');
 const capEl = document.getElementById('lbcap');
+const tiles = () => [...document.querySelectorAll('[data-lb]')];
 let cur = 0;
 let opener = null;
 
 function render() {
-  const t = tiles[cur];
+  const t = tiles()[cur];
   stage.innerHTML = '';
   if ('yt' in t.dataset) {
     if (t.dataset.yt) {
@@ -166,7 +206,7 @@ function render() {
 }
 function openAt(i) {
   cur = i;
-  opener = tiles[i];
+  opener = tiles()[i];
   lb.hidden = false;
   document.body.style.overflow = 'hidden';
   render();
@@ -179,11 +219,15 @@ function closeLb() {
   if (opener) opener.focus();
 }
 function step(d) {
-  cur = (cur + d + tiles.length) % tiles.length;
+  const n = tiles().length;
+  cur = (cur + d + n) % n;
   render();
 }
 
-tiles.forEach((t, i) => t.addEventListener('click', () => openAt(i)));
+document.addEventListener('click', (e) => {
+  const t = e.target.closest('[data-lb]');
+  if (t && !lb.contains(t)) openAt(tiles().indexOf(t));
+});
 lb.querySelector('.lb-x').addEventListener('click', closeLb);
 lb.querySelector('.prev').addEventListener('click', () => step(-1));
 lb.querySelector('.next').addEventListener('click', () => step(1));
