@@ -1,10 +1,10 @@
 // Pengaturan pengiriman laporan
-// - endpoint: isi dengan alamat Web App dari Google Apps Script (lihat langkah pengaturan).
-// - email: cadangan; bila pengiriman gagal atau endpoint kosong, aplikasi email dibuka dengan isi laporan
+// - endpoint: isi dengan alamat Web App dari Google Apps Script (berakhiran /exec).
+// - email: dipakai hanya bila pengguna menekan tombol "Kirim lewat email" setelah pengiriman gagal
 //   (foto tidak ikut terkirim lewat email).
 const CONFIG = {
-  endpoint: 'https://script.google.com/macros/s/AKfycbw504-UYHH6c2U9GhkpgAj2FRTD8qoTw-6qzndnveoZ60cddbAc-UBZmFuFWfZIg2VZsg/exec'
-  email: 'uei.depthse@gmail.com'
+  endpoint: 'https://script.google.com/macros/s/AKfycbw504-UYHH6c2U9GhkpgAj2FRTD8qoTw-6qzndnveoZ60cddbAc-UBZmFuFWfZIg2VZsg/exec',
+  email: 'hse@perusahaan.com'
 };
 const MAX_FOTO = 3;
 
@@ -57,11 +57,12 @@ function kecilkan(file) {
       URL.revokeObjectURL(url);
       res({ name: file.name, type: 'image/jpeg', data: c.toDataURL('image/jpeg', 0.75).split(',')[1] });
     };
-    img.onerror = () => rej(new Error('Foto tidak dapat dibaca'));
+    img.onerror = () => rej(new Error('foto tidak dapat dibaca'));
     img.src = url;
   });
 }
 
+// Cadangan: hanya dijalankan bila pengguna menekan tombolnya
 function viaEmail(title, data) {
   const text = Object.entries(data)
     .filter(([k]) => k !== 'Website')
@@ -80,14 +81,28 @@ form.addEventListener('submit', async (e) => {
   st.textContent = 'Mengirim...';
 
   try {
-    if (!CONFIG.endpoint) throw new Error('Alamat penerima belum diatur');
+    if (!CONFIG.endpoint) throw new Error('alamat penerima (endpoint) belum diisi di laporan.js');
+
     const fotos = await Promise.all([...fotoInput.files].map(kecilkan));
-    const r = await fetch(CONFIG.endpoint, {
-      method: 'POST',
-      body: JSON.stringify({ laporan: title, ...data, fotos })
-    });
-    const j = await r.json();
-    if (!j.ok) throw new Error(j.error || 'Gagal');
+
+    let r;
+    try {
+      r = await fetch(CONFIG.endpoint, {
+        method: 'POST',
+        body: JSON.stringify({ laporan: title, ...data, fotos })
+      });
+    } catch {
+      throw new Error('tidak dapat terhubung ke Google. Periksa alamat Web App dan pastikan akses diatur "Anyone"');
+    }
+
+    let j;
+    try {
+      j = await r.json();
+    } catch {
+      throw new Error('balasan Google tidak terbaca. Pastikan deployment sudah diizinkan dan akses diatur "Anyone"');
+    }
+    if (!j.ok) throw new Error(j.error || 'ditolak oleh server');
+
     form.reset();
     prev.replaceChildren();
     setNow();
@@ -95,8 +110,13 @@ form.addEventListener('submit', async (e) => {
     st.textContent = 'Laporan terkirim. Terima kasih sudah melapor.';
   } catch (err) {
     st.className = 'err';
-    st.textContent = 'Laporan belum dapat dikirim ke server. Aplikasi email Anda dibuka sebagai cadangan; foto tidak ikut, kirim terpisah ke petugas HSE.';
-    viaEmail(title, data);
+    st.textContent = 'Laporan belum terkirim. Penyebab: ' + err.message + '. ';
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = 'Kirim lewat email';
+    b.style.cssText = 'margin-top:8px;padding:6px 14px;border:2px solid currentColor;border-radius:999px;background:none;color:inherit;font:inherit;font-weight:700;cursor:pointer';
+    b.addEventListener('click', () => viaEmail(title, data));
+    st.append(b);
   } finally {
     btn.disabled = false;
   }
