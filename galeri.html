@@ -101,6 +101,18 @@
 
 <script src="assets/js/global.js"></script>
 <script>
+// Cuplikan video otomatis dari YouTube (berdasarkan data-yt)
+document.querySelectorAll('.vid').forEach((v) => {
+  const id = v.dataset.yt;
+  if (!id) return;
+  const img = new Image();
+  img.alt = v.dataset.cap;
+  img.loading = 'lazy';
+  img.onerror = () => img.remove();
+  img.src = 'https://i.ytimg.com/vi/' + encodeURIComponent(id) + '/hqdefault.jpg';
+  v.querySelector('.ph').prepend(img);
+});
+
 // Baris foto yang bisa digeser dengan tombol
 const strip = document.getElementById('strip');
 const sprev = document.querySelector('.sprev');
