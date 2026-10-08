@@ -3,7 +3,7 @@
 // - email: cadangan; bila pengiriman gagal atau endpoint kosong, aplikasi email dibuka dengan isi laporan
 //   (foto tidak ikut terkirim lewat email).
 const CONFIG = {
-  endpoint: 'https://script.google.com/macros/s/AKfycbwYj_07Kww_V8vYhAYFgq9mp3uadtvCgoiSiACE-FWwP-KDpZo7MPDJ-D38RkC6lMKG3w/exec',
+  endpoint: 'https://script.google.com/macros/s/AKfycbw504-UYHH6c2U9GhkpgAj2FRTD8qoTw-6qzndnveoZ60cddbAc-UBZmFuFWfZIg2VZsg/exec'
   email: 'uei.depthse@gmail.com'
 };
 const MAX_FOTO = 3;
