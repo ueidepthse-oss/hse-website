@@ -4,7 +4,7 @@
 //   (foto tidak ikut terkirim lewat email).
 const CONFIG = {
   endpoint: 'https://script.google.com/macros/s/AKfycbw504-UYHH6c2U9GhkpgAj2FRTD8qoTw-6qzndnveoZ60cddbAc-UBZmFuFWfZIg2VZsg/exec',
-  email: 'hse@perusahaan.com'
+  email: 'admin.jayadi@gmail.com'
 };
 const MAX_FOTO = 3;
 
