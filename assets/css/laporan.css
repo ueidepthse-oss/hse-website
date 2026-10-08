@@ -23,7 +23,7 @@
 .rp-head h1{font-size:clamp(28px,4vw,38px);line-height:1.1}
 .rp-head .lead{max-width:640px;margin-top:8px;font-size:15px;color:#fffffff0}
 .rp-body{display:grid;grid-template-columns:1fr 320px;gap:30px;padding-top:30px;padding-bottom:64px;align-items:start}
-.rp-form{background:#fff;border:1px solid var(--line);border-top:5px solid var(--ac);border-radius:10px;padding:24px}
+.rp-form{background:#fff;border:1px solid var(--line);border-top:5px solid var(--ac);border-radius:10px;padding:24px;position:relative}
 .rp-form label,.rp-form .lbl{display:block;font-size:13.5px;font-weight:700;color:var(--g2)}
 .rp-form input:not([type=radio]),.rp-form select,.rp-form textarea{display:block;width:100%;margin-top:6px;padding:11px 12px;border:1.5px solid #cbd9d0;border-radius:8px;font:inherit;font-size:14.5px;font-weight:400;color:var(--ink);background:#fff}
 .rp-form textarea{min-height:96px;resize:vertical}
@@ -35,6 +35,13 @@
 .opt{display:inline-flex!important;align-items:center;gap:8px;padding:9px 16px;border:1.5px solid #cbd9d0;border-radius:999px;font-weight:600!important;cursor:pointer}
 .opt input{margin:0;accent-color:var(--ac)}
 .opt:has(input:checked){border-color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,#fff);color:var(--ac)}
+
+/* Unggah foto */
+.rp-form input[type=file]{padding:10px;background:#f6faf7;border-style:dashed;font-size:13.5px}
+.prev{display:flex;gap:10px;flex-wrap:wrap;margin:-6px 0 16px}
+.prev img{width:84px;height:84px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+.rp-form input.hp{position:absolute!important;left:-9999px;width:1px!important;height:1px!important;opacity:0}
+
 .rp-btn{margin-top:6px;padding:13px 30px;border:0;border-radius:999px;background:var(--ac);color:#fff;font:inherit;font-size:15px;font-weight:700;cursor:pointer}
 .rp-btn:hover{filter:brightness(1.1)}
 .rp-btn:disabled{opacity:.6;cursor:default}
