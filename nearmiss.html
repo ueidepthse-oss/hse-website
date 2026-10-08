@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Near Miss Report | HSE Department</title>
+<meta name="description" content="Formulir laporan kejadian nyaris celaka (near miss) HSE Department.">
+<link rel="stylesheet" href="assets/css/global.css">
+<link rel="stylesheet" href="assets/css/laporan.css">
+</head>
+<body class="r-near">
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="index.html">
+      <img class="logo-img" src="assets/img/logo.png" alt="Logo HSE Department" height="46">
+      <span><b>HSE DEPARTMENT</b><small>Health | Safety | Environment</small></span>
+    </a>
+    <button class="burger" aria-label="Menu" aria-expanded="false">&#9776;</button>
+    <nav class="nav" aria-label="Menu utama">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li class="dd"><a href="profil.html">Profil</a>
+          <ul class="sub"><li><a href="profil.html#visi">Visi &amp; Misi</a></li><li><a href="profil.html#struktur">Struktur Organisasi</a></li></ul></li>
+        <li class="dd"><a href="regulasi.html">Regulasi</a>
+          <ul class="sub"><li><a href="regulasi.html#pemerintah">Peraturan Pemerintah</a></li><li><a href="regulasi.html#internal">Kebijakan Internal</a></li></ul></li>
+        <li class="dd"><a href="dokumen.html">Prosedur &amp; Dokumen</a>
+          <ul class="sub"><li><a href="dokumen.html#sop">SOP &amp; JSA</a></li><li><a href="dokumen.html#formulir">Formulir</a></li></ul></li>
+        <li class="dd"><a href="program.html">Program</a>
+          <ul class="sub"><li><a href="program.html#keselamatan">Program K3</a></li><li><a href="program.html#lingkungan">Program Lingkungan</a></li><li><a href="program.html#inspeksi">Inspeksi</a></li></ul></li>
+        <li class="dd"><a href="berita.html">Berita &amp; Informasi</a>
+          <ul class="sub"><li><a href="berita.html">Berita</a></li><li><a href="berita.html#pengumuman">Pengumuman</a></li></ul></li>
+        <li class="dd"><a href="galeri.html">Galeri</a>
+          <ul class="sub"><li><a href="galeri.html#foto">Foto</a></li><li><a href="galeri.html#video">Video</a></li></ul></li>
+        <li><a href="kontak.html">Kontak</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="rp-head">
+    <div class="wrap">
+      <p class="crumb"><a href="index.html">Home</a> / Near Miss Report</p>
+      <h1>&#9889; Near Miss Report</h1>
+      <p class="lead">Ceritakan kejadian nyaris celaka. Laporan Anda membantu mencegah kejadian yang sama menimbulkan korban.</p>
+    </div>
+  </section>
+
+  <div class="wrap rp-body">
+    <form class="rp-form" id="rp" data-title="Near Miss Report">
+      <div class="row">
+        <label><span class="req">Tanggal &amp; waktu kejadian</span><input type="datetime-local" name="Tanggal dan waktu kejadian" required></label>
+        <label><span class="req">Lokasi</span><input name="Lokasi" placeholder="Contoh: Jalan hauling" required></label>
+      </div>
+      <div class="row">
+        <label><span class="req">Nama pelapor</span><input name="Nama pelapor" required></label>
+        <label>Departemen / perusahaan<input name="Departemen atau perusahaan"></label>
+      </div>
+      <label><span class="req">Kronologi kejadian</span><textarea name="Kronologi kejadian" placeholder="Apa yang terjadi, urutannya, dan siapa yang terlibat?" required></textarea></label>
+      <label>Potensi akibat jika kejadian berlanjut<textarea name="Potensi akibat"></textarea></label>
+      <label>Dugaan penyebab<textarea name="Dugaan penyebab"></textarea></label>
+      <label>Saran pencegahan<textarea name="Saran pencegahan"></textarea></label>
+      <button class="rp-btn" type="submit">Kirim Laporan</button>
+      <p id="st" role="status"></p>
+    </form>
+
+    <aside class="rp-tips">
+      <h2>Apa itu near miss?</h2>
+      <ul>
+        <li>Kejadian tak terduga yang nyaris menimbulkan cedera atau kerusakan, tetapi tidak jadi.</li>
+        <li>Contoh: benda jatuh di dekat pekerja, alat berat nyaris menabrak, atau terpeleset tanpa cedera.</li>
+        <li>Melapor bukan untuk mencari siapa yang salah, tetapi untuk memperbaiki penyebabnya.</li>
+        <li>Foto kejadian dapat dikirim terpisah ke petugas HSE.</li>
+      </ul>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot">
+    <div class="brand">
+      <img class="logo-img" src="assets/img/logo-footer.png" alt="Logo HSE Department" height="32">
+      <span><b>HSE DEPARTMENT</b><small>Health | Safety | Environment</small></span>
+    </div>
+    <span class="copy">&copy; 2026 HSE Department. All rights reserved.</span>
+  </div>
+</footer>
+
+<script src="assets/js/global.js"></script>
+<script src="assets/js/laporan.js"></script>
+</body>
+</html>
