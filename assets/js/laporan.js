@@ -1,5 +1,5 @@
 // Pengaturan pengiriman laporan
-// - endpoint: isi dengan alamat Web App dari Google Apps Script (berakhiran /exec).
+// - endpoint: alamat Web App dari Google Apps Script (berakhiran /exec).
 // - email: dipakai hanya bila pengguna menekan tombol "Kirim lewat email" setelah pengiriman gagal
 //   (foto tidak ikut terkirim lewat email).
 const CONFIG = {
