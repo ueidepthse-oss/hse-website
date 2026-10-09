@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inspeksi | HSE Department</title>
+<meta name="description" content="Isi formulir inspeksi HSE langsung di website. Hasil tersimpan sebagai PDF dan dapat diunduh.">
+<link rel="stylesheet" href="assets/css/global.css">
+<link rel="stylesheet" href="assets/css/inspeksi.css">
+</head>
+<body>
 
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="index.html">
+      <img class="logo-img" src="assets/img/logo.png" alt="Logo HSE Department" height="46">
+      <span><b>HSE DEPARTMENT</b><small>Health | Safety | Environment</small></span>
+    </a>
+    <button class="burger" aria-label="Menu" aria-expanded="false">&#9776;</button>
+    <nav class="nav" aria-label="Menu utama">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li class="dd"><a href="profil.html">Profil</a>
+          <ul class="sub"><li><a href="profil.html#visi">Visi &amp; Misi</a></li><li><a href="profil.html#struktur">Struktur Organisasi</a></li></ul></li>
+        <li class="dd"><a href="regulasi.html">Regulasi</a>
+          <ul class="sub"><li><a href="regulasi.html#pemerintah">Peraturan Pemerintah</a></li><li><a href="regulasi.html#internal">Kebijakan Internal</a></li></ul></li>
+        <li class="dd"><a href="dokumen.html">Prosedur &amp; Dokumen</a>
+          <ul class="sub"><li><a href="dokumen.html#sop">SOP &amp; JSA</a></li><li><a href="dokumen.html#formulir">Formulir</a></li></ul></li>
+        <li class="dd"><a class="on" href="program.html">Program</a>
+          <ul class="sub"><li><a href="program.html#keselamatan">Program K3</a></li><li><a href="program.html#lingkungan">Program Lingkungan</a></li><li><a href="program.html#inspeksi">Inspeksi</a></li></ul></li>
+        <li class="dd"><a href="berita.html">Berita &amp; Informasi</a>
+          <ul class="sub"><li><a href="berita.html">Berita</a></li><li><a href="berita.html#pengumuman">Pengumuman</a></li></ul></li>
+        <li class="dd"><a href="galeri.html">Galeri</a>
+          <ul class="sub"><li><a href="galeri.html#foto">Foto</a></li><li><a href="galeri.html#video">Video</a></li></ul></li>
+        <li><a href="kontak.html">Kontak</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="in-head">
+    <div class="wrap">
+      <p class="crumb"><a href="index.html">Home</a> / <a href="program.html#inspeksi">Program</a> / Inspeksi</p>
+      <h1>&#128269; Inspeksi</h1>
+      <p class="lead">Isi formulir inspeksi langsung dari HP atau komputer. Hasilnya dibuat menjadi PDF, tersimpan di Google Drive HSE, dan dapat Anda unduh.</p>
+    </div>
+  </section>
+
+  <div class="wrap in-body">
+    <h2 class="in-t">Pilih jenis inspeksi</h2>
+    <div class="pick-grid" id="pilih"></div>
+
+    <div id="area" hidden></div>
+    <div id="hasil" hidden></div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot">
+    <div class="brand">
+      <img class="logo-img" src="assets/img/logo-footer.png" alt="Logo HSE Department" height="32">
+      <span><b>HSE DEPARTMENT</b><small>Health | Safety | Environment</small></span>
+    </div>
+    <span class="copy">&copy; 2026 HSE Department. All rights reserved.</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js"></script>
+<script src="assets/js/global.js"></script>
+<script src="assets/js/inspeksi-data.js"></script>
+<script src="assets/js/inspeksi.js"></script>
+</body>
+</html>
