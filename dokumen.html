@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Prosedur &amp; Dokumen | HSE Department</title>
-<meta name="description" content="Rak dokumen HSE: SOP, JSA, formulir, dan checklist yang dapat diunduh.">
+<meta name="description" content="Rak dokumen HSE: SOP, JSA, formulir, dan checklist yang dapat dilihat dan diunduh.">
 <link rel="stylesheet" href="assets/css/global.css">
 <link rel="stylesheet" href="assets/css/dokumen.css">
 </head>
@@ -31,7 +31,7 @@
         <li class="dd"><a href="berita.html">Berita &amp; Informasi</a>
           <ul class="sub"><li><a href="berita.html">Berita</a></li><li><a href="berita.html#pengumuman">Pengumuman</a></li></ul></li>
         <li class="dd"><a href="galeri.html">Galeri</a>
-          <ul class="sub"><li><a href="galeri.html">Foto</a></li><li><a href="galeri.html#video">Video</a></li></ul></li>
+          <ul class="sub"><li><a href="galeri.html#foto">Foto</a></li><li><a href="galeri.html#video">Video</a></li></ul></li>
         <li><a href="kontak.html">Kontak</a></li>
       </ul>
     </nav>
@@ -43,7 +43,7 @@
     <div class="wrap">
       <p class="crumb"><a href="index.html">Home</a> / Prosedur &amp; Dokumen</p>
       <h1>Prosedur &amp; Dokumen</h1>
-      <p class="lead">Rak dokumen HSE: prosedur kerja, analisis keselamatan pekerjaan, formulir, dan checklist yang siap diunduh.</p>
+      <p class="lead">Rak dokumen HSE: lihat langsung di website atau unduh prosedur kerja, formulir, dan checklist.</p>
       <div class="dk-tabs" role="group" aria-label="Kategori dokumen">
         <button class="act" data-k="all">Semua</button>
         <button data-k="sop">SOP</button>
@@ -55,16 +55,13 @@
 
   <div class="wrap dk-body">
 
+    <div class="dk-search">
+      <input id="dq" type="search" placeholder="Cari dokumen, misalnya: ketinggian, LOTO, limbah..." aria-label="Cari dokumen" autocomplete="off">
+    </div>
+
     <section class="dk-sec" id="sop">
       <h2>SOP <span>Standard Operating Procedure</span></h2>
-      <ul class="docs">
-        <li class="doc"><span class="fmt pdf">PDF</span><b>SOP Pelaporan Insiden &amp; Near Miss</b><span class="no">HSE-SOP-001 &middot; Rev 01</span><a class="dl" href="files/hse-sop-001.pdf" download>Unduh</a></li>
-        <li class="doc"><span class="fmt pdf">PDF</span><b>SOP Izin Kerja (SIP)</b><span class="no">HSE-SOP-002 &middot; Rev 01</span><a class="dl" href="files/hse-sop-002.pdf" download>Unduh</a></li>
-        <li class="doc"><span class="fmt pdf">PDF</span><b>SOP Pengoperasian Alat Berat</b><span class="no">HSE-SOP-003 &middot; Rev 01</span><a class="dl" href="files/hse-sop-003.pdf" download>Unduh</a></li>
-        <li class="doc"><span class="fmt pdf">PDF</span><b>SOP Tanggap Darurat</b><span class="no">HSE-SOP-004 &middot; Rev 01</span><a class="dl" href="files/hse-sop-004.pdf" download>Unduh</a></li>
-        <li class="doc"><span class="fmt pdf">PDF</span><b>SOP Pengelolaan Limbah</b><span class="no">HSE-SOP-005 &middot; Rev 01</span><a class="dl" href="files/hse-sop-005.pdf" download>Unduh</a></li>
-        <li class="doc"><span class="fmt pdf">PDF</span><b>SOP Inspeksi Area Kerja</b><span class="no">HSE-SOP-006 &middot; Rev 01</span><a class="dl" href="files/hse-sop-006.pdf" download>Unduh</a></li>
-      </ul>
+      <ul class="docs" id="sop-list"></ul>
     </section>
 
     <section class="dk-sec" id="jsa">
@@ -80,7 +77,7 @@
     <section class="dk-sec" id="formulir">
       <h2>Formulir &amp; Checklist <span>Isi dan kirim ke HSE</span></h2>
       <ul class="docs">
-        <li class="doc"><span class="fmt docx">DOCX</span><b>Formulir Distribusi APD</b><span class="no">UEI/HSE/FRM/007 &middot; Rev 01</span><a class="dl" href="files/UEI-HSE-FRM-007 (Formulir Distribusi APD).docx" download>Unduh</a></li>
+        <li class="doc"><span class="fmt docx">DOCX</span><b>Formulir Laporan Insiden</b><span class="no">HSE-FRM-001 &middot; Rev 01</span><a class="dl" href="files/hse-frm-001.docx" download>Unduh</a></li>
         <li class="doc"><span class="fmt docx">DOCX</span><b>Formulir Hazard Report</b><span class="no">HSE-FRM-002 &middot; Rev 01</span><a class="dl" href="files/hse-frm-002.docx" download>Unduh</a></li>
         <li class="doc"><span class="fmt xlsx">XLSX</span><b>Checklist Inspeksi APD</b><span class="no">HSE-CHK-001 &middot; Rev 01</span><a class="dl" href="files/hse-chk-001.xlsx" download>Unduh</a></li>
         <li class="doc"><span class="fmt xlsx">XLSX</span><b>Checklist Inspeksi APAR</b><span class="no">HSE-CHK-002 &middot; Rev 01</span><a class="dl" href="files/hse-chk-002.xlsx" download>Unduh</a></li>
@@ -89,7 +86,21 @@
       </ul>
     </section>
 
+    <p class="dk-empty" id="dq-empty" hidden>Tidak ada dokumen yang cocok. Coba kata kunci lain.</p>
+
   </div>
+
+  <dialog id="viewer" aria-label="Baca SOP">
+    <div class="v-bar">
+      <b id="vt"></b>
+      <div class="v-act">
+        <a id="v-docx" download>Unduh DOCX</a>
+        <a id="v-pdf" download>Unduh PDF</a>
+        <button id="vx" type="button">Tutup</button>
+      </div>
+    </div>
+    <iframe id="vframe" title="Isi SOP"></iframe>
+  </dialog>
 </main>
 
 <footer class="site-footer">
@@ -104,13 +115,83 @@
 
 <script src="assets/js/global.js"></script>
 <script>
-// Tab kategori dokumen (juga membaca #sop, #jsa, #formulir dari menu)
+// Daftar SOP. Tulis nama file persis (tanpa .docx / .pdf). Untuk menambah SOP, cukup tambah satu baris.
+// File diletakkan di folder files/sop/ dalam dua versi: .docx (unduh) dan .pdf (lihat di web).
+const SOP = [
+  'UEI-HSE-SOP-001 Prosedur Izin Kerja',
+  'UEI-HSE-SOP-002 Prosedur Pekerjaan Panas',
+  'UEI-HSE-SOP-003 Prosedur Pekerjaan Pada Ketinggian',
+  'UEI-HSE-SOP-004 Prosedur Pekerjaan Pada Ruangan Terbatas',
+  'UEI-HSE-SOP-005 Prosedur Pekerjaan Penggalian',
+  'UEI-HSE-SOP-006 Prosedur Penerapan LOTO',
+  'UEI-HSE-SOP-007 Prosedur Pekerjaan Pengangkatan',
+  'UEI-HSE-SOP-008 Prosedur Pengelolaan Alat Pelindung Diri',
+  'UEI-HSE-SOP-009 Prosedur Pengelolaan Limbah B3',
+  'UEI-HSE-SOP-010 Prosedur Keadaan Darurat Kebakaran Conveyor Batubara',
+  'UEI-HSE-SOP-011 Prosedur Tanggap Darurat Ruangan Genset'
+];
+const path = (base, ext) => 'files/sop/' + encodeURIComponent(base) + '.' + ext;
+
+// Susun kotak SOP
+const list = document.getElementById('sop-list');
+SOP.forEach((base) => {
+  const code = base.split(' ')[0];
+  const li = document.createElement('li');
+  li.className = 'doc';
+  li.innerHTML = '<span class="fmt sop">SOP</span><b></b><span class="no"></span>' +
+    '<div class="btns"><button type="button" class="vw">Lihat</button><a class="dl" download>Unduh</a></div>';
+  li.querySelector('b').textContent = base.slice(code.length + 1);
+  li.querySelector('.no').textContent = code;
+  li.querySelector('.dl').href = path(base, 'docx');
+  li.querySelector('.vw').addEventListener('click', () => openSop(base));
+  list.append(li);
+});
+
+// Jendela baca SOP (PDF). Di HP dibuka di tab baru.
+const dlg = document.getElementById('viewer');
+const frame = document.getElementById('vframe');
+function openSop(base) {
+  const pdf = path(base, 'pdf');
+  if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
+    window.open(pdf, '_blank', 'noopener');
+    return;
+  }
+  document.getElementById('vt').textContent = base;
+  document.getElementById('v-docx').href = path(base, 'docx');
+  document.getElementById('v-pdf').href = pdf;
+  frame.src = pdf;
+  dlg.showModal();
+}
+document.getElementById('vx').addEventListener('click', () => dlg.close());
+dlg.addEventListener('close', () => { frame.src = 'about:blank'; });
+dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+
+// Tab kategori dan pencarian
 const tabs = document.querySelectorAll('.dk-tabs button');
 const secs = document.querySelectorAll('.dk-sec');
+const dq = document.getElementById('dq');
+let kat = 'all';
 
+function apply() {
+  const t = dq.value.trim().toLowerCase();
+  let tampil = 0;
+  secs.forEach((s) => {
+    const aktif = kat === 'all' || s.id === kat;
+    let n = 0;
+    s.querySelectorAll('.doc').forEach((d) => {
+      const cocok = d.textContent.toLowerCase().includes(t);
+      d.hidden = !cocok;
+      if (cocok) n++;
+    });
+    s.hidden = !aktif || n === 0;
+    if (aktif) tampil += n;
+  });
+  document.getElementById('dq-empty').hidden = tampil > 0;
+}
 function show(k) {
-  tabs.forEach((t) => t.classList.toggle('act', t.dataset.k === k));
-  secs.forEach((s) => { s.hidden = !(k === 'all' || s.id === k); });
+  kat = k;
+  tabs.forEach((x) => x.classList.toggle('act', x.dataset.k === k));
+  apply();
 }
 function fromHash() {
   const h = location.hash.slice(1);
@@ -121,10 +202,11 @@ function fromHash() {
     show('all');
   }
 }
-tabs.forEach((t) => t.addEventListener('click', () => {
-  show(t.dataset.k);
-  history.replaceState(null, '', t.dataset.k === 'all' ? location.pathname : '#' + t.dataset.k);
+tabs.forEach((x) => x.addEventListener('click', () => {
+  show(x.dataset.k);
+  history.replaceState(null, '', x.dataset.k === 'all' ? location.pathname : '#' + x.dataset.k);
 }));
+dq.addEventListener('input', apply);
 window.addEventListener('hashchange', fromHash);
 fromHash();
 </script>
