@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Prosedur &amp; Dokumen | HSE Department</title>
-<meta name="description" content="Rak dokumen HSE: SOP, JSA, formulir, dan checklist yang dapat dilihat dan diunduh.">
+<meta name="description" content="Rak dokumen HSE: SOP, JSA, dan formulir yang dapat dilihat dan diunduh.">
 <link rel="stylesheet" href="assets/css/global.css">
 <link rel="stylesheet" href="assets/css/dokumen.css">
 </head>
@@ -43,12 +43,12 @@
     <div class="wrap">
       <p class="crumb"><a href="index.html">Home</a> / Prosedur &amp; Dokumen</p>
       <h1>Prosedur &amp; Dokumen</h1>
-      <p class="lead">Rak dokumen HSE: lihat langsung di website atau unduh prosedur kerja, formulir, dan checklist.</p>
+      <p class="lead">Rak dokumen HSE: lihat langsung di website atau unduh prosedur kerja dan formulir.</p>
       <div class="dk-tabs" role="group" aria-label="Kategori dokumen">
         <button class="act" data-k="all">Semua</button>
         <button data-k="sop">SOP</button>
         <button data-k="jsa">JSA</button>
-        <button data-k="formulir">Formulir &amp; Checklist</button>
+        <button data-k="formulir">Formulir</button>
       </div>
     </div>
   </section>
@@ -56,7 +56,7 @@
   <div class="wrap dk-body">
 
     <div class="dk-search">
-      <input id="dq" type="search" placeholder="Cari dokumen, misalnya: ketinggian, LOTO, limbah..." aria-label="Cari dokumen" autocomplete="off">
+      <input id="dq" type="search" placeholder="Cari dokumen, misalnya: ketinggian, LOTO, APAR, bor..." aria-label="Cari dokumen" autocomplete="off">
     </div>
 
     <section class="dk-sec" id="sop">
@@ -75,22 +75,15 @@
     </section>
 
     <section class="dk-sec" id="formulir">
-      <h2>Formulir &amp; Checklist <span>Isi dan kirim ke HSE</span></h2>
-      <ul class="docs">
-        <li class="doc"><span class="fmt docx">DOCX</span><b>Formulir Laporan Insiden</b><span class="no">HSE-FRM-001 &middot; Rev 01</span><a class="dl" href="files/hse-frm-001.docx" download>Unduh</a></li>
-        <li class="doc"><span class="fmt docx">DOCX</span><b>Formulir Hazard Report</b><span class="no">HSE-FRM-002 &middot; Rev 01</span><a class="dl" href="files/hse-frm-002.docx" download>Unduh</a></li>
-        <li class="doc"><span class="fmt xlsx">XLSX</span><b>Checklist Inspeksi APD</b><span class="no">HSE-CHK-001 &middot; Rev 01</span><a class="dl" href="files/hse-chk-001.xlsx" download>Unduh</a></li>
-        <li class="doc"><span class="fmt xlsx">XLSX</span><b>Checklist Inspeksi APAR</b><span class="no">HSE-CHK-002 &middot; Rev 01</span><a class="dl" href="files/hse-chk-002.xlsx" download>Unduh</a></li>
-        <li class="doc"><span class="fmt xlsx">XLSX</span><b>Checklist Inspeksi P3K</b><span class="no">HSE-CHK-003 &middot; Rev 01</span><a class="dl" href="files/hse-chk-003.xlsx" download>Unduh</a></li>
-        <li class="doc"><span class="fmt xlsx">XLSX</span><b>Checklist Harian Alat Berat</b><span class="no">HSE-CHK-004 &middot; Rev 01</span><a class="dl" href="files/hse-chk-004.xlsx" download>Unduh</a></li>
-      </ul>
+      <h2>Formulir <span>Lihat atau unduh, lalu isi</span></h2>
+      <div id="form-groups"></div>
     </section>
 
     <p class="dk-empty" id="dq-empty" hidden>Tidak ada dokumen yang cocok. Coba kata kunci lain.</p>
 
   </div>
 
-  <dialog id="viewer" aria-label="Baca SOP">
+  <dialog id="viewer" aria-label="Baca dokumen">
     <div class="v-bar">
       <b id="vt"></b>
       <div class="v-act">
@@ -99,7 +92,7 @@
         <button id="vx" type="button">Tutup</button>
       </div>
     </div>
-    <iframe id="vframe" title="Isi SOP"></iframe>
+    <iframe id="vframe" title="Isi dokumen"></iframe>
   </dialog>
 </main>
 
@@ -115,8 +108,11 @@
 
 <script src="assets/js/global.js"></script>
 <script>
-// Daftar SOP. Tulis nama file persis (tanpa .docx / .pdf). Untuk menambah SOP, cukup tambah satu baris.
-// File diletakkan di folder files/sop/ dalam dua versi: .docx (unduh) dan .pdf (lihat di web).
+// DAFTAR DOKUMEN
+// Tulis nama file persis (tanpa .docx / .pdf). Untuk menambah dokumen, cukup tambah satu baris.
+// Setiap dokumen ada dua file di foldernya: .docx (untuk diunduh) dan .pdf (untuk dilihat di web).
+//   SOP      -> folder files/sop/
+//   Formulir -> folder files/formulir/
 const SOP = [
   'UEI-HSE-SOP-001 Prosedur Izin Kerja',
   'UEI-HSE-SOP-002 Prosedur Pekerjaan Panas',
@@ -130,34 +126,93 @@ const SOP = [
   'UEI-HSE-SOP-010 Prosedur Keadaan Darurat Kebakaran Conveyor Batubara',
   'UEI-HSE-SOP-011 Prosedur Tanggap Darurat Ruangan Genset'
 ];
-const path = (base, ext) => 'files/sop/' + encodeURIComponent(base) + '.' + ext;
 
-// Susun kotak SOP
-const list = document.getElementById('sop-list');
-SOP.forEach((base) => {
+const FORM = [
+  { judul: 'Inspeksi Area, Alat, dan Kendaraan', files: [
+    'UEI-HSE-FRM-005 (Formulir Inspeksi Area Kerja)',
+    'UEI-HSE-FRM-008 (Formulir Inspeksi APAR)',
+    'UEI-HSE-FRM-009 (Formulir Inspeksi Gerinda Tangan)',
+    'UEI-HSE-FRM-010 (Formulir Inspeksi Bor Listrik)',
+    'UEI-HSE-FRM-011 (Formulir Inspeksi Bor Baterai)',
+    'UEI-HSE-FRM-012 (Formulir Inspeksi Jig Saw)',
+    'UEI-HSE-FRM-013 (Formulir Inspeksi Circular Saw)',
+    'UEI-HSE-FRM-014 (Formulir Inspeksi Heat Gun)',
+    'UEI-HSE-FRM-015 (Formulir Inspeksi Cutting Wheel)',
+    'UEI-HSE-FRM-016 (Formulir Inspeksi Bor Magnet)',
+    'UEI-HSE-FRM-019 (Formulir P2H Light Vehicle)'
+  ]},
+  { judul: 'Keselamatan & Perilaku Kerja', files: [
+    'UEI-HSE-FRM-001 (Formulir Daftar Hadir P5M)',
+    'UEI-HSE-FRM-002 (Formulir Coaching Karyawan)',
+    'UEI-HSE-FRM-003 (Formulir JSA)',
+    'UEI-HSE-FRM-006 (Kartu Behavior Based Safety)'
+  ]},
+  { judul: 'APD, Perizinan & Stok HSE', files: [
+    'UEI-HSE-FRM-007 (Formulir Distribusi APD)',
+    'UEI-HSE-FRM-020 (Formulir Serah Terima APD)',
+    'UEI-HSE-FRM-021 (Formulir Serah Termia Mine Permit & SIMPER)',
+    'UEI-HSE-FRM-022 (Formulir Stock Opname HSE)'
+  ]},
+  { judul: 'Rapat', files: [
+    'UEI-HSE-FRM-017 (Daftar Hadir Rapat)',
+    'UEI-HSE-FRM-018 (Notulen Rapat)'
+  ]},
+  { judul: 'Monitoring Lingkungan Kerja', files: [
+    'UEI-HSE-FRM-023 (Formulir Monitoring Kebisingan)',
+    'UEI-HSE-FRM-024 (Formulir Monitoring Penerangan)'
+  ]}
+];
+
+// Judul tampilan yang diperbaiki (kunci = kode dokumen). Nama file tetap seperti aslinya.
+const JUDUL = {
+  'UEI-HSE-FRM-021': 'Formulir Serah Terima Mine Permit & SIMPER'
+};
+
+const path = (folder, base, ext) => 'files/' + folder + '/' + encodeURIComponent(base) + '.' + ext;
+
+// Susun satu kotak dokumen: Lihat + Unduh
+function kartu(folder, base, badge) {
   const code = base.split(' ')[0];
+  const judul = JUDUL[code] || base.slice(code.length + 1).replace(/^\(|\)$/g, '');
   const li = document.createElement('li');
   li.className = 'doc';
-  li.innerHTML = '<span class="fmt sop">SOP</span><b></b><span class="no"></span>' +
+  li.innerHTML = '<span class="fmt"></span><b></b><span class="no"></span>' +
     '<div class="btns"><button type="button" class="vw">Lihat</button><a class="dl" download>Unduh</a></div>';
-  li.querySelector('b').textContent = base.slice(code.length + 1);
+  const fm = li.querySelector('.fmt');
+  fm.classList.add(badge.cls);
+  fm.textContent = badge.txt;
+  li.querySelector('b').textContent = judul;
   li.querySelector('.no').textContent = code;
-  li.querySelector('.dl').href = path(base, 'docx');
-  li.querySelector('.vw').addEventListener('click', () => openSop(base));
-  list.append(li);
+  li.querySelector('.dl').href = path(folder, base, 'docx');
+  li.querySelector('.vw').addEventListener('click', () => bukaDokumen(folder, base, code + ' ' + judul));
+  return li;
+}
+
+SOP.forEach((b) => document.getElementById('sop-list').append(kartu('sop', b, { cls: 'sop', txt: 'SOP' })));
+
+FORM.forEach((g) => {
+  const wrap = document.createElement('div');
+  wrap.className = 'fgrp';
+  const h = document.createElement('h3');
+  h.textContent = g.judul;
+  const ul = document.createElement('ul');
+  ul.className = 'docs';
+  g.files.forEach((b) => ul.append(kartu('formulir', b, { cls: 'frm', txt: 'FORM' })));
+  wrap.append(h, ul);
+  document.getElementById('form-groups').append(wrap);
 });
 
-// Jendela baca SOP (PDF). Di HP dibuka di tab baru.
+// Jendela baca (PDF). Di HP dibuka di tab baru.
 const dlg = document.getElementById('viewer');
 const frame = document.getElementById('vframe');
-function openSop(base) {
-  const pdf = path(base, 'pdf');
+function bukaDokumen(folder, base, judul) {
+  const pdf = path(folder, base, 'pdf');
   if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
     window.open(pdf, '_blank', 'noopener');
     return;
   }
-  document.getElementById('vt').textContent = base;
-  document.getElementById('v-docx').href = path(base, 'docx');
+  document.getElementById('vt').textContent = judul;
+  document.getElementById('v-docx').href = path(folder, base, 'docx');
   document.getElementById('v-pdf').href = pdf;
   frame.src = pdf;
   dlg.showModal();
@@ -186,6 +241,7 @@ function apply() {
     s.hidden = !aktif || n === 0;
     if (aktif) tampil += n;
   });
+  document.querySelectorAll('.fgrp').forEach((g) => { g.hidden = !g.querySelector('.doc:not([hidden])'); });
   document.getElementById('dq-empty').hidden = tampil > 0;
 }
 function show(k) {
