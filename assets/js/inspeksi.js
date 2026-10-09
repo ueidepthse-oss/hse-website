@@ -1,6 +1,6 @@
 // Pengaturan: isi dengan alamat Web App Google Apps Script yang SAMA dengan di laporan.js (berakhiran /exec).
 // Bila kosong, PDF tetap dibuat dan bisa diunduh, tetapi tidak disimpan ke Google Drive.
-const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyYNcTFLj-H501Ev4vtCtWnF-rGS8uiutoriuDfVDNY9tsdd3T9WbQDel2ZxeCl2J5MHw/exec';
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxCuQizuGxTjFRb-RBzH1KGLcGHeSte8RrG6TOduUEign4cXVamvwoibbz3h4EsRIiDlQ/exec';
 
 const $ = (id) => document.getElementById(id);
 const pilih = $('pilih');
