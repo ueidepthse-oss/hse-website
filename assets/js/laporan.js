@@ -3,7 +3,7 @@
 // - email: dipakai hanya bila pengguna menekan tombol "Kirim lewat email" setelah pengiriman gagal
 //   (foto tidak ikut terkirim lewat email).
 const CONFIG = {
-  endpoint: 'https://script.google.com/macros/s/AKfycbw504-UYHH6c2U9GhkpgAj2FRTD8qoTw-6qzndnveoZ60cddbAc-UBZmFuFWfZIg2VZsg/exec',
+  endpoint: 'https://script.google.com/macros/s/AKfycbyYNcTFLj-H501Ev4vtCtWnF-rGS8uiutoriuDfVDNY9tsdd3T9WbQDel2ZxeCl2J5MHw/exec',
   email: 'admin.jayadi@gmail.com'
 };
 const MAX_FOTO = 3;
