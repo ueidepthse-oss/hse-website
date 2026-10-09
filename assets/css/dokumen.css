@@ -16,10 +16,15 @@
 .dk-search input:focus{outline:none;border-color:var(--g3);box-shadow:0 0 0 4px #22a55922}
 .dk-sec{margin-bottom:40px;scroll-margin-top:96px}
 .dk-sec:last-of-type{margin-bottom:0}
-.dk-sec[hidden],.doc[hidden],.dk-empty[hidden]{display:none}
+.dk-sec[hidden],.fgrp[hidden],.doc[hidden],.dk-empty[hidden]{display:none}
 .dk-sec h2{font-size:22px;color:var(--g2);margin-bottom:16px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
 .dk-sec h2 span{font-size:13px;font-weight:600;color:var(--mut)}
 .dk-empty{margin-top:30px;padding:28px;text-align:center;border:2px dashed #bcd9c8;border-radius:8px;color:var(--mut)}
+
+/* Kelompok formulir */
+.fgrp{margin-bottom:28px}
+.fgrp:last-child{margin-bottom:0}
+.fgrp h3{margin:0 0 12px;padding-bottom:6px;font-size:16px;color:var(--g1);border-bottom:2px solid #cfe5d7}
 
 /* Lembar dokumen */
 .docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
@@ -31,6 +36,7 @@
 .fmt.docx{background:#2b6cb0}
 .fmt.xlsx{background:#1e8449}
 .fmt.sop{background:var(--g1)}
+.fmt.frm{background:#0e7c86}
 .doc b{margin-top:6px;font-size:15px;line-height:1.35;color:var(--g2)}
 .doc .no{font-size:12.5px;color:var(--mut);flex:1}
 .dl,.vw{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 16px;border-radius:999px;border:2px solid var(--g3);font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:background .2s,color .2s}
@@ -40,11 +46,11 @@
 .vw{background:var(--g1);border-color:var(--g1);color:#fff}
 .vw:hover{background:var(--g3);border-color:var(--g3)}
 
-/* Dua tombol pada SOP: Lihat + Unduh */
+/* Dua tombol: Lihat + Unduh */
 .btns{display:flex;gap:8px;margin-top:8px}
 .btns>*{flex:1;margin-top:0}
 
-/* Jendela baca SOP */
+/* Jendela baca dokumen */
 #viewer{width:min(1100px,96vw);height:92vh;padding:0;border:0;border-radius:12px;overflow:hidden}
 #viewer[open]{display:flex;flex-direction:column}
 #viewer::backdrop{background:rgba(4,14,9,.65)}
