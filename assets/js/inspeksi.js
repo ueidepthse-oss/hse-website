@@ -1,4 +1,4 @@
-// Pengaturan: isi dengan alamat Web App Google Apps Script yang SAMA dengan di laporan.js (berakhiran /exec).
+// Alamat Web App Google Apps Script (sama dengan di laporan.js).
 // Bila kosong, PDF tetap dibuat dan bisa diunduh, tetapi tidak disimpan ke Google Drive.
 const ENDPOINT = 'https://script.google.com/macros/s/AKfycbxCuQizuGxTjFRb-RBzH1KGLcGHeSte8RrG6TOduUEign4cXVamvwoibbz3h4EsRIiDlQ/exec';
 
@@ -38,6 +38,24 @@ const hariIni = () => {
   n.setMinutes(n.getMinutes() - n.getTimezoneOffset());
   return n.toISOString().slice(0, 10);
 };
+
+// Menerjemahkan pesan gagal menjadi penjelasan yang mudah dipahami
+function jelaskan(err) {
+  const m = String((err && err.message) || err);
+  if (/Failed to fetch|NetworkError|Load failed/i.test(m)) {
+    return 'tidak dapat terhubung ke Google. Pastikan akses Web App diatur "Anyone" dan alamatnya benar';
+  }
+  if (/JSON|Unexpected token/i.test(m)) {
+    return 'balasan Google tidak terbaca. Pastikan akses Web App diatur "Anyone"';
+  }
+  if (m === 'Jenis laporan tidak dikenal') {
+    return 'kode Apps Script di Google masih versi lama. Tempel kode terbaru lalu Deploy dengan New version';
+  }
+  if (m === 'Gagal menyimpan') {
+    return 'skrip Google gagal menyimpan. Periksa ID folder inspeksi di Apps Script';
+  }
+  return m;
+}
 
 // Pilihan jenis inspeksi
 INSPEKSI.forEach((f) => {
@@ -299,7 +317,7 @@ async function kirim(form, btn, st) {
       ok = true;
       pesan = 'Inspeksi tersimpan di Google Drive HSE. Anda juga dapat mengunduh salinan PDF-nya.';
     } catch (err) {
-      pesan = 'PDF sudah dibuat, tetapi belum tersimpan di Google Drive (' + err.message + '). Unduh PDF di bawah dan serahkan ke petugas HSE.';
+      pesan = 'PDF sudah dibuat, tetapi belum tersimpan di Google Drive: ' + jelaskan(err) + '. Unduh PDF di bawah dan serahkan ke petugas HSE.';
     }
   }
 
