@@ -581,6 +581,7 @@ function buatPdf(d) {
   const M = 12;
   const TOP = 44;
   const HIJAU = [15, 92, 58];
+  const PUTIH = [255, 255, 255];
   const GELAP = [23, 51, 42];
   const TEPI = [190, 205, 196];
   const margin = { top: TOP, left: M, right: M, bottom: 18 };
@@ -630,7 +631,7 @@ function buatPdf(d) {
     startY: doc.lastAutoTable.finalY + 5, margin, theme: 'grid',
     head: [['NO', 'ITEM PEMERIKSAAN', F.jawabPdf[0], F.jawabPdf[1], F.jawabPdf[2], 'CATATAN']],
     body,
-    headStyles: { fillColor: HIJAU, halign: 'center', fontSize: 8 },
+    headStyles: { fillColor: HIJAU, textColor: PUTIH, halign: 'center', fontSize: 8 },
     styles: { fontSize: 8.5, cellPadding: 1.6, lineColor: TEPI, lineWidth: 0.2, textColor: GELAP, valign: 'middle' },
     columnStyles: {
       0: { cellWidth: 9, halign: 'center' },
@@ -659,7 +660,7 @@ function buatPdf(d) {
       startY: doc.lastAutoTable.finalY + 6, margin, theme: 'grid',
       head: [['NO', 'TEMUAN', 'REKOMENDASI PERBAIKAN', 'PIC']],
       body: tb,
-      headStyles: { fillColor: HIJAU, halign: 'center', fontSize: 8 },
+      headStyles: { fillColor: HIJAU, textColor: PUTIH, halign: 'center', fontSize: 8 },
       styles: { fontSize: 8.5, cellPadding: 1.8, lineColor: TEPI, lineWidth: 0.2, textColor: GELAP },
       columnStyles: { 0: { cellWidth: 9, halign: 'center' }, 1: { cellWidth: 70 }, 2: { cellWidth: 70 }, 3: { cellWidth: 37 } }
     });
@@ -675,25 +676,28 @@ function buatPdf(d) {
     yy += 7;
   }
 
-  // Pengesahan
-  if (yy + 52 > 279) { doc.addPage(); yy = TOP; }
-  const lebar = (W - 2 * M) / d.ttd.length;
+  // Pengesahan: satu penanda tangan = kotak persegi di sisi kanan; lebih dari satu = deret kolom
+  const satu = d.ttd.length === 1;
+  if (yy + (satu ? 60 : 52) > 279) { doc.addPage(); yy = TOP; }
+  const lebarKol = satu ? 58 : (W - 2 * M) / d.ttd.length;
   doc.autoTable({
-    startY: yy, margin, theme: 'grid', rowPageBreak: 'avoid',
+    startY: yy,
+    margin: { top: TOP, left: satu ? W - M - lebarKol : M, right: M, bottom: 18 },
+    theme: 'grid', rowPageBreak: 'avoid',
     head: [d.ttd.map((s) => s.peran)],
     body: [
-      d.ttd.map(() => ({ content: '', styles: { minCellHeight: 26 } })),
+      d.ttd.map(() => ({ content: '', styles: { minCellHeight: satu ? 35 : 26 } })),
       d.ttd.map((s) => ({ content: s.nama || ' ', styles: { fontStyle: 'bold' } })),
       d.ttd.map((s) => s.jabatan || ' ')
     ],
-    headStyles: { fillColor: HIJAU, halign: 'center', fontSize: 8 },
+    headStyles: { fillColor: HIJAU, textColor: PUTIH, halign: 'center', fontSize: 8 },
     styles: { fontSize: 9, cellPadding: 1.8, lineColor: TEPI, lineWidth: 0.2, textColor: GELAP, halign: 'center' },
-    columnStyles: Object.fromEntries(d.ttd.map((_, k) => [k, { cellWidth: lebar }])),
+    columnStyles: Object.fromEntries(d.ttd.map((_, k) => [k, { cellWidth: lebarKol }])),
     didDrawCell: (c) => {
       if (c.section === 'body' && c.row.index === 0 && c.column.index === 0 && d.ttdImg) {
         const h = Math.min(c.cell.height - 4, (c.cell.width - 12) / 3);
         const w = h * 3;
-        doc.addImage(d.ttdImg, 'PNG', c.cell.x + (c.cell.width - w) / 2, c.cell.y + 2, w, h);
+        doc.addImage(d.ttdImg, 'PNG', c.cell.x + (c.cell.width - w) / 2, c.cell.y + (c.cell.height - h) / 2, w, h);
       }
     }
   });
@@ -702,38 +706,43 @@ function buatPdf(d) {
   const n = doc.getNumberOfPages();
   for (let p = 1; p <= n; p++) {
     doc.setPage(p);
-    doc.setFillColor(...HIJAU);
-    doc.rect(M, 10, 60, 28, 'F');
-    doc.setTextColor(255, 255, 255);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(14);
-    doc.text('HSE', M + 30, 20, { align: 'center' });
-    doc.setFontSize(8);
-    doc.text('DEPARTMENT', M + 30, 25, { align: 'center' });
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(6.5);
-    doc.text('Health | Safety | Environment', M + 30, 30, { align: 'center' });
-    doc.text(PERUSAHAAN, M + 30, 34.5, { align: 'center' });
 
-    const x0 = M + 64;
-    const w = W - M - x0;
+    // Kotak identitas dokumen (kiri, ringkas)
+    const wI = 70;
     const rows = [['No. Dokumen', F.noDok], ['Tanggal Berlaku', F.berlaku], ['No. Revisi', F.revisi], ['Halaman', p + ' dari ' + n], ['Departemen', F.departemen]].filter((r) => r[1]);
     const rh = 28 / rows.length;
     doc.setDrawColor(...TEPI);
     doc.setLineWidth(0.3);
-    doc.rect(x0, 10, w, 28);
+    doc.rect(M, 10, wI, 28);
     rows.forEach((r, k) => {
       const ya = 10 + k * rh;
-      if (k) doc.line(x0, ya, x0 + w, ya);
+      if (k) doc.line(M, ya, M + wI, ya);
       doc.setTextColor(...GELAP);
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(8);
-      doc.text(r[0], x0 + 2, ya + rh / 2 + 1.1);
-      doc.text(':', x0 + 34, ya + rh / 2 + 1.1);
+      doc.text(r[0], M + 2, ya + rh / 2 + 1.1);
+      doc.text(':', M + 29, ya + rh / 2 + 1.1);
       doc.setFont('helvetica', 'normal');
-      doc.text(String(r[1]), x0 + 38, ya + rh / 2 + 1.1);
+      doc.text(String(r[1]), M + 32, ya + rh / 2 + 1.1);
     });
 
+    // Blok HSE DEPARTMENT (kanan, panjang)
+    const xH = M + wI + 3;
+    const wH = W - M - xH;
+    doc.setFillColor(...HIJAU);
+    doc.rect(xH, 10, wH, 28, 'F');
+    doc.setTextColor(...PUTIH);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(20);
+    doc.text('HSE DEPARTMENT', xH + wH / 2, 22, { align: 'center' });
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.text('Health | Safety | Environment', xH + wH / 2, 28.5, { align: 'center' });
+    doc.setFontSize(7.5);
+    doc.text(PERUSAHAAN, xH + wH / 2, 34, { align: 'center' });
+
+    // Kaki dokumen
+    doc.setDrawColor(...TEPI);
     doc.line(M, 285, W - M, 285);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(7.5);
