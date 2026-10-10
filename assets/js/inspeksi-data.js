@@ -76,7 +76,7 @@ const INSPEKSI = [
 
   // ---------- FRM-008: APAR (butir masih contoh, menunggu file Word) ----------
   { key: 'apar', ikon: '🧯', kode: 'UEI-HSE-FRM-008', pendek: 'APAR', nama: 'Formulir Inspeksi APAR',
-    meta: { noDok: 'UEI/HSE/FRM/008', departemen: 'HSE' },
+    meta: { noDok: 'UEI/HSE/FRM/008', berlaku: '01 Oktober 2025', departemen: 'HSE' },
     judul: 'FORMULIR INSPEKSI APAR',
     jawab: ['Ya', 'Tidak', 'N/A'], jawabPdf: ['YA', 'TDK', 'N/A'],
     info: { lokasi: null },
